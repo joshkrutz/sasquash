@@ -1,0 +1,35 @@
+# Node
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tsbuildinfo
+
+# Monorepo artifacts
+.pnp.*
+.pnpm-debug.log
+
+# Builds
+dist/
+build/
+.next/
+out/
+*.log
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Vite
+.vite/
+
+# IDE
+.vscode/
+.idea/
+*.sw?
+
+# macOS / system
+.DS_Store
+Thumbs.db
