@@ -2,8 +2,11 @@
   "name": "@joshkrutz/sasquash",
   "version": "1.0.0",
   "description": "Embeddable React component for reporting bugs & auto-changelogs",
-  "license": "ISC",
+  "license": "MIT",
   "author": "joshkrutz",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/sasquash.cjs.js",
   "module": "dist/sasquash.es.js",
   "types": "dist/types/index.d.ts",
@@ -35,5 +38,10 @@
     "changelog",
     "react",
     "component"
-  ]
+  ],
+  "dependencies": {
+    "@octokit/plugin-throttling": "^11.0.1",
+    "@octokit/types": "^14.1.0",
+    "octokit": "^5.0.3"
+  }
 }
