@@ -1,17 +1,17 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
-  plugins: [react()],
   build: {
-    target: 'esnext',
+    target: 'node18',
     lib: {
-      entry: 'src/index.ts',
-      formats: ['es', 'cjs'],
-      name: 'sasquash',
+      entry: path.resolve(__dirname, 'src/bin/index.ts'),
+      formats: ['cjs'],
+      fileName: () => 'bin/index.js',
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['fs', 'path', 'url'],
     },
+    outDir: 'dist',
   },
 })
