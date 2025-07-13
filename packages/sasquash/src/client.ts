@@ -10,23 +10,29 @@ import type {
 
 const Octo = Octokit.plugin(throttling)
 
-export function createSasquashClient({
-  token,
-  owner,
-  repo,
-  doLogging = false,
-}: Config) {
+export function createSasquashClient({ token, owner, repo }: Config) {
   const octokit = new Octo({
     auth: token,
     throttle: {
-      onRateLimit: (_retryAfter: number, req: RequestOptions) => {
-        if (doLogging) console.warn(`Rate limit hit: ${req.method} ${req.url}`)
-        return (req.request?.retryCount ?? 0) === 0
+      onRateLimit: (retryAfter: number, options: RequestOptions) => {
+        octokit.log.warn(
+          `Request quota exhausted for ${options.method} ${options.url}`
+        )
+
+        // Retry twice after hitting a rate limit error, then give up
+        if (options.request && options.request.retryCount <= 2) {
+          console.log(`Retrying after ${retryAfter} seconds!`)
+          return true
+        }
       },
-      onAbuseLimit: (_retryAfter: number, req: RequestOptions) => {
-        if (doLogging)
-          console.error(`Abuse detection: ${req.method} ${req.url}`)
-        return false
+      onSecondaryRateLimit: (
+        retryAfter: number,
+        options: RequestOptions,
+        octokit: typeof Octo
+      ) => {
+        octokit.log.warn(
+          `Secondary quota detected for request ${options.method} ${options.url}`
+        )
       },
     },
   })

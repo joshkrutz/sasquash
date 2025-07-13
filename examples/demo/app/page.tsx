@@ -1,4 +1,6 @@
-import Image from "next/image";
+import Image from 'next/image'
+import Sasquasher from './components/Sasquasher'
+import { Toaster } from '@/components/ui/sonner'
 
 export default function Home() {
   return (
@@ -14,21 +16,20 @@ export default function Home() {
         />
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
-            Get started by running{" "}
+            Populate a .env file with your GITHUB_TOKEN, GITHUB_REPO,
+            GITHUB_OWNER
             <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
               pnpm add @joshkrutz/sasquash
             </code>
             .
           </li>
-          <li className="tracking-[-.01em]">
-            instructions 2...
-          </li>
+          <li className="tracking-[-.01em]">instructions 2...</li>
         </ol>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          href="https://github.com/joshkrutz"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -43,6 +44,8 @@ export default function Home() {
           More by @joshkrutz
         </a>
       </footer>
+      <Sasquasher repo="" token="" owner="" />
+      <Toaster />
     </div>
-  );
+  )
 }
