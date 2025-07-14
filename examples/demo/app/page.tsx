@@ -44,7 +44,7 @@ export default function Home() {
           More by @joshkrutz
         </a>
       </footer>
-      <Sasquasher repo="" token="" owner="" />
+      <Sasquasher endpoint="/api/sasquash/report" />
       <Toaster />
     </div>
   )

@@ -34,6 +34,16 @@ export async function addSasquasher() {
   // Copy local shadcn-style ui components
   copyRecursiveSync(path.join(srcDir, 'ui'), targetDir)
 
+  // Copy in the template api
+  const apiSrc = path.join(srcDir, 'api', 'report.ts')
+  const apiDest = path.resolve(
+    process.cwd(),
+    'app/api/sasquash/report/route.ts'
+  )
+  fs.mkdirSync(path.dirname(apiDest), { recursive: true })
+  fs.copyFileSync(apiSrc, apiDest)
+  console.log('Installed API route at app/api/sasquash/report/route.ts')
+
   // Install dependencies
   const deps = JSON.parse(
     fs.readFileSync(path.join(srcDir, 'dependencies.json'), 'utf-8')

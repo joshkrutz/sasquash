@@ -10,7 +10,6 @@ import { Button } from './button'
 import { Input } from './input'
 import { Label } from './label'
 import { Textarea } from './textarea'
-import { createSasquashClient, SasquashConfig } from '@joshkrutz/sasquash'
 
 const post = (positive = true, text = 'Your bug report was successful') => {
   toast.custom((t) => (
@@ -38,14 +37,16 @@ const postFailed = (errorMessage = '') => {
   post(false, 'Post failed - ' + errorMessage)
 }
 
-export default function Sasquasher({ token, owner, repo }: SasquashConfig) {
+type Props = {
+  endpoint: string
+}
+
+export default function Sasquasher({ endpoint }: Props) {
   const [isFormOpen, setFormOpen] = useState(false)
-  const [body, setDescription] = useState('')
+  const [description, setDescription] = useState('')
   const [title, setTitle] = useState('')
 
   var MAX_CHAR_DESC = 1500
-
-  var client = createSasquashClient({ token, owner, repo })
 
   return (
     <div>
@@ -89,19 +90,36 @@ export default function Sasquasher({ token, owner, repo }: SasquashConfig) {
             }}
           />
           <p className="text-sm text-right">
-            {body.length}/{MAX_CHAR_DESC}
+            {description.length}/{MAX_CHAR_DESC}
           </p>
           <Button
             className="w-full"
             onClick={async () => {
               try {
-                const response = await client.createIssue({ title, body })
+                const res = await fetch(endpoint, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ title, description }),
+                })
+
+                if (!res.ok) {
+                  const errorData = await res.json().catch(() => null)
+                  const message =
+                    errorData?.message ||
+                    `Request failed with status ${res.status}`
+                  throw new Error(message)
+                }
+
                 post()
               } catch (error) {
                 if (error instanceof Error) {
                   postFailed(error.message.split('-')[0].trim())
+                } else {
+                  postFailed('Unknown error')
                 }
               } finally {
+                setDescription('')
+                setTitle('')
                 setFormOpen(false)
               }
             }}
