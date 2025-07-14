@@ -1,6 +1,6 @@
 {
   "name": "@joshkrutz/sasquash",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Embeddable React component for reporting bugs & auto-changelogs",
   "license": "MIT",
   "author": "joshkrutz",
@@ -13,7 +13,9 @@
   "files": [
     "dist",
     "bin",
-    "templates"
+    "templates/sasquasher/ui",
+    "templates/sasquasher/component.tsx",
+    "templates/sasquasher/dependencies.json"
   ],
   "bin": {
     "sasquash": "dist/index.js"
