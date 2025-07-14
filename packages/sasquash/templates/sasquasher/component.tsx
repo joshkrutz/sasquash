@@ -5,24 +5,19 @@ import { Bug, CheckCircle2, CircleAlert, Send } from 'lucide-react'
 import { toast } from 'sonner'
 import * as motion from 'framer-motion/client'
 
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from './popover'
+import { Popover, PopoverContent, PopoverTrigger } from './popover'
 import { Button } from './button'
 import { Input } from './input'
 import { Label } from './label'
 import { Textarea } from './textarea'
 import { createSasquashClient, SasquashConfig } from '@joshkrutz/sasquash'
 
-
 const post = (positive = true, text = 'Your bug report was successful') => {
   toast.custom((t) => (
     <div
       className={
-        (`flex items-center gap-3 p-4 border-l-4 bg-white dark:bg-zinc-900 rounded shadow`) +
-        positive ? ' border-green-500' : ' border-red-500'
+        'flex items-center gap-3 p-4 border-l-4 bg-white dark:bg-zinc-900 rounded shadow' +
+        (positive ? ' border-green-500' : ' border-red-500')
       }
       onClick={() => toast.dismiss(t)}
     >
