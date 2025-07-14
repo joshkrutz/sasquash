@@ -4,6 +4,7 @@ import { execa } from 'execa'
 
 function copyRecursiveSync(src: string, dest: string) {
   fs.mkdirSync(dest, { recursive: true })
+  console.log('Installing template shadcn components:')
 
   for (const entry of fs.readdirSync(src)) {
     const srcPath = path.join(src, entry)
@@ -14,6 +15,7 @@ function copyRecursiveSync(src: string, dest: string) {
       copyRecursiveSync(srcPath, destPath)
     } else {
       fs.copyFileSync(srcPath, destPath)
+      console.log(`Installed ${stat}`)
     }
   }
 }
