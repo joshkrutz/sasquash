@@ -7,20 +7,19 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/sasquash.cjs.js",
-  "module": "dist/sasquash.es.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.js",
   "files": [
     "dist",
-    "bin",
     "templates"
   ],
   "bin": {
-    "sasquash": "dist/index.js"
+    "sasquash": "dist/index.cli.js"
   },
   "sideEffects": false,
   "scripts": {
-    "build": "tsup bin/index.ts --format cjs --dts --out-dir dist",
+    "build": "tsup",
     "dev": "vite",
     "clean": "rimraf dist"
   },
@@ -46,7 +45,6 @@
     "component"
   ],
   "dependencies": {
-    "@joshkrutz/sasquash": "^1.1.2",
     "@octokit/plugin-throttling": "^11.0.1",
     "@octokit/types": "^14.1.0",
     "citty": "^0.1.6",

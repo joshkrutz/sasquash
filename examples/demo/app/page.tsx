@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Sasquasher from './components/Sasquasher'
+import Sasquasher from '@/components/ui/Sasquasher'
 import { Toaster } from '@/components/ui/sonner'
 
 export default function Home() {

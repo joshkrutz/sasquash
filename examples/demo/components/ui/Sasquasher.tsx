@@ -16,7 +16,6 @@ import { Label } from './label'
 import { Textarea } from './textarea'
 import { createSasquashClient, SasquashConfig } from '@joshkrutz/sasquash'
 
-
 const post = (positive = true, text = 'Your bug report was successful') => {
   toast.custom((t) => (
     <div
