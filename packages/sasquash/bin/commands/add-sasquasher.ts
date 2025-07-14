@@ -15,7 +15,7 @@ function copyRecursiveSync(src: string, dest: string) {
       copyRecursiveSync(srcPath, destPath)
     } else {
       fs.copyFileSync(srcPath, destPath)
-      console.log(`Installed ${stat}`)
+      console.log(` >Copied ${entry}`)
     }
   }
 }
@@ -32,7 +32,6 @@ export async function addSasquasher() {
   )
 
   // Copy local shadcn-style ui components
-  console.log('Copying UI templates from:', path.join(srcDir, 'ui'))
   copyRecursiveSync(path.join(srcDir, 'ui'), targetDir)
 
   // Install dependencies
@@ -43,5 +42,4 @@ export async function addSasquasher() {
   await execa('pnpm', ['add', ...deps], { stdio: 'inherit' })
 
   console.log('Sasquasher installed at components/ui/')
-  console.log(process.cwd())
 }
